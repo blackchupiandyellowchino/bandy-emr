@@ -1,4 +1,4 @@
-import time
+import datetime
 import sys
 
 
@@ -7,6 +7,7 @@ class Tarjeta:
 		self.guita = 0
 		self.flag_bondi_ant = False
 		self.bondi_ant = 0
+		self.time_bondi_ant = 0
 		aux_donetravels = Viaje()
 		# Ehm, la lista deberia tener el bondi, la hora y el costo del pasaje de cada viaje
 		list_viajes = []
@@ -17,30 +18,25 @@ class Tarjeta:
 		# guita - costo
 		# Then copiar datos a aux_doneTravels y de ahi a list_viajes[]
 
-		# if tome bondi antes and self.bondi_anterior != Bondi_actual -> Transbordo
-
-			if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.linea:
-				if self.guita >= 1.9:
-					self.guita = self.guita - 1.9
-					self.flag_bondi_ant = False
-					self.bondi_anterior = 0
-					# aux_donetravels.set_travel(bondiola,hora,costo)
-					list_viajes.append(aux_donetravels)
-					return True
-				else:
-					return False
+		if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.linea and datetime.datetime.now() - self.time_bondi_ant < datetime.timedelta(minutes=60):
+			if self.guita >= 1.9:
+				self.guita = self.guita - 1.9
+				self.flag_bondi_ant = False
+				self.bondi_anterior = 0			# LINEA de bondi anterior
+				self.time_bondi_ant = 0
+				aux_donetravels.set_travel(bondiola,hora,costo)
+				list_viajes.append(aux_donetravels)
+				return True
+			else:
 
 		# else Normal
-
-			else:
 				if self.guita >= 5.75:
 					self.guita = self.guita - 5.75
 					if self.flag_bondi_ant == False:
 						self.flag_bondi_ant = True
-					else:
-						self.flag_bondi_ant = False
 					self.bondi_anterior = bondiola.linea
-					# aux_donetravels.set_travel(bondiola,hora,costo)
+					self.time_bondi_ant = datetime.datetime.now()
+					aux_donetravels.set_travel(bondiola,hora,costo)
 					list_viajes.append(aux_donetravels)
 					return True
 				else:
