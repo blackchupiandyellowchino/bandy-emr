@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, time
+import time
 
 now = datetime.now()
 
@@ -37,7 +38,7 @@ class Tarjeta:
 				if self.flag_bondi_ant == False:
 					self.flag_bondi_ant = True
 				self.bondi_anterior = bondiola.line
-				self.time_bondi_ant = now
+				self.time_bondi_ant = self.horario
 				self.aux_donetravels.set_travel(bondiola,self.horario,5.75)
 				self.list_viajes.append(self.aux_donetravels)
 				self.aux_donetravels = Viaje()
@@ -63,7 +64,7 @@ class Tarjeta:
 	def doneTravels (self):
 		# Return list_viajes
 		for travel in self.list_viajes:
-			print str(travel.hora) + ", " + str(travel.costo) + ", " + str(travel.line) + ", " + str(travel.int) + ", " + str(travel.emp)
+			print (str(travel.hora) + ", " + str(travel.costo) + ", " + str(travel.line) + ", " + str(travel.int) + ", " + str(travel.emp))
 
 
 
@@ -74,8 +75,7 @@ class TarjetaMedioBoleto (Tarjeta):
 
 	def payTicket (self,bondiola,horario):
 		self.horario = horario
-		print self.horario.time()
-		if time(00,00,00) >= self.horario.time() >= time(06,00,00):
+		if 0 <= self.horario.time().hour <= 6:
 			self.auxpayTicket(bondiola,horario)
 		else:
 			if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.line and self.horario - self.time_bondi_ant < timedelta(minutes=60):
@@ -95,7 +95,7 @@ class TarjetaMedioBoleto (Tarjeta):
 					if self.flag_bondi_ant == False:
 						self.flag_bondi_ant = True
 					self.bondi_anterior = bondiola.line
-					self.time_bondi_ant = now
+					self.time_bondi_ant = self.horario
 					self.aux_donetravels.set_travel(bondiola,self.horario,2.9)
 					self.list_viajes.append(self.aux_donetravels)
 					self.aux_donetravels = Viaje()
@@ -157,56 +157,86 @@ T.reload(196)
 T.reload(50)
 
 
-print "Tarjeta normal \n"
+print ("Tarjeta normal \n")
 
-print "Dinero fase 1: " + str(T.money())
+print ("Dinero fase 1: " + str(T.money()) )
 
+time.sleep(1)
 
 
 #Primer viaje
 
 T.payTicket(C116, datetime.now())
 
-print "Dinero fase 2: " + str(T.money())
+print ("Dinero fase 2 (primer viaje): " + str(T.money()) )
+
+time.sleep(1)
+
 
 
 #Segundo viaje (Transbordo)
 
 T.payTicket(C112, datetime.now())
 
-print "Dinero fase 3: " + str(T.money())
+print ("Dinero fase 3 (segundo viaje; transbordo): " + str(T.money()))
+
+time.sleep(1)
+
+
 
 
 #Tercer viaje 
 
 T.payTicket(C116, datetime.now())
 
-print "Dinero fase 4: " + str(T.money())
+print ("Dinero fase 4 (tercer viaje): " + str(T.money()) )
+
+time.sleep(1)
+
+
 
 
 #Cuarto viaje (no transbordo ya que pasa mas de una hora)
 
 T.payTicket(C136, (timedelta(hours=7) + datetime.now()))
 
-print "Dinero fase 5: " + str(T.money())
+print ("Dinero fase 5 (cuarto viaje; 7 horas despues): " + str(T.money()) )
+
+time.sleep(1.5)
+
+
+
 
 
 
 # Viajes realizados
 
-print "\n Viajes realizados con la tarjeta normal: \n"
+print ("\n \nViajes realizados con la tarjeta normal: \n" )
+
+time.sleep(1)
+
 
 T.doneTravels()
 
-print "\nDinero disponible (tarjeta normal): " + str(T.money())
+
+time.sleep(1)
+
+
+
+print ("\nDinero disponible (tarjeta normal): " + str(T.money()) )
+
+
+
+time.sleep(1.5)
 
 
 
 
 
-print "\n \n ---------------------------------------- \n \n \n"
+print ("\n \n ---------------------------------------- \n \n \n" )
 
 
+time.sleep(1)
 
 
 
@@ -221,39 +251,91 @@ D.reload(368)
 D.reload(196)
 
 
-print "Tarjeta con medio boleto \n \n"
 
-print "Dinero fase 1: " + str(D.money())
+print ("Tarjeta con medio boleto \n \n")
+
+print ("Dinero fase 1: " + str(D.money()) )
+
+time.sleep(1)
+
 
 
 #Primer viaje
 
 D.payTicket(C116, datetime.now())
 
-print "Dinero fase 2: " + str(D.money())
+print ("Dinero fase 2 (primer viaje): " + str(D.money()) )
+
+time.sleep(1)
+
+
+
 
 
 #Segundo viaje (transbordo)
 
 D.payTicket(C112, datetime.now())
 
-print "Dinero fase 3: " + str(D.money())
+print ("Dinero fase 3 (segundo viaje; transbordo): " + str(D.money()) )
+
+time.sleep(1)
+
+
+
+
 
 
 #Tercer viaje
 
-D.payTicket(C116, datetime.now())
-
-print "Dinero fase 4: " + str(D.money())
-
-
-#Cuarto viaje (transbordo NORMAL)
-
-D.payTicket(C136, timedelta(hours=5)+datetime.now())
-
-print "Dinero fase 5: " + str(D.money())
+#Este testeo fue hecho a las 12:48. Para comprobar la precision de los viajes medio boleto en la franja horaria entre las 0 y las 6
+#basta con solo cambiar el timedelta
 
 
-print "\nViajes realizados con la tarjeta medio boleto: \n"
+D.payTicket(C116, timedelta(hours=14)+datetime.now())
+
+print ("Dinero fase 4 (tercer viaje, 14 horas despues; viaje normal): " + str(D.money()) )
+
+time.sleep(1)
+
+
+
+
+#print ("\n \n Datos de la tarjeta despues del tercer viaje: \n \n ")
+
+#print(str(D.time_bondi_ant))
+
+
+#Cuarto viaje (DEBERIA ser TRANSBORDO NORMAL)
+
+D.payTicket(C136, timedelta(hours=14)+datetime.now())
+
+
+#print ("\n \n Datos de la tarjeta despues del Cuarto viaje: \n \n ")
+
+#print(str(D.time_bondi_ant))
+
+
+
+print ("Dinero fase 5 (cuarto viaje; transbordo normal): " + str(D.money()) )
+
+
+time.sleep(1.5)
+
+
+
+
+
+print ("\n \nViajes realizados con la tarjeta medio boleto: \n" )
+
+time.sleep(1)
+
 
 D.doneTravels()
+
+time.sleep(1)
+
+print ("\nDinero disponible (tarjeta medio boleto): " + str(T.money()) )
+
+
+
+time.sleep(1)
