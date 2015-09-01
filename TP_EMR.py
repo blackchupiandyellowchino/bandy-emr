@@ -338,4 +338,4 @@ print ("\nDinero disponible (tarjeta medio boleto): " + str(T.money()) )
 
 
 
-time.sleep(1)
+time.sleep(1.5)
