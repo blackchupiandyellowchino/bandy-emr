@@ -3,6 +3,8 @@ import time
 
 now = datetime.now()
 
+#datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M")
+
 class Tarjeta:
 	def __init__(self):
 		self.guita = 0
