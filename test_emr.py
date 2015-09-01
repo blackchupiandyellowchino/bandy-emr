@@ -2,4 +2,5 @@ from TP_EMR import *
 
 def test_reload():
 	T = Tarjeta()
-	assert T.reload(196) == 230
+	T.reload(196)
+	assert T.money() == 230
