@@ -1,6 +1,5 @@
 from TP_EMR import *
 
-T = Tarjeta()
-
 def test_reload():
+	T = Tarjeta()
 	assert T.reload(196) == 230
