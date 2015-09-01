@@ -136,7 +136,7 @@ class Viaje:
 
 
 
-
+"""
 
 
 C112 = Bondis("Azul",112,1)
@@ -339,3 +339,5 @@ print ("\nDinero disponible (tarjeta medio boleto): " + str(T.money()) )
 
 
 time.sleep(1.5)
+
+"""
