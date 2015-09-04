@@ -1,3 +1,3 @@
 # bandy-emr
 
-https://travis-ci.org/blackchupiandyellowchino/bandy-emr.svg
+{<img src="https://travis-ci.org/blackchupiandyellowchino/bandy-emr.svg" alt="Build Status" />}[https://travis-ci.org/blackchupiandyellowchino/bandy-emr]
