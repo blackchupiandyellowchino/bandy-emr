@@ -1,7 +1,7 @@
-from datetime import datetime, timedelta, time
-import time
-
-now = datetime.now()
+#from datetime import datetime, timedelta, time
+#import time
+import datetime
+#now = datetime.now()
 
 #datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M")
 
@@ -168,7 +168,7 @@ time.sleep(1)
 
 #Primer viaje
 
-T.payTicket(C116, datetime.now())
+T.payTicket(C116, ddatetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 2 (primer viaje): " + str(T.money()) )
 
@@ -178,7 +178,7 @@ time.sleep(1)
 
 #Segundo viaje (Transbordo)
 
-T.payTicket(C112, datetime.now())
+T.payTicket(C112, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 3 (segundo viaje; transbordo): " + str(T.money()))
 
@@ -189,7 +189,7 @@ time.sleep(1)
 
 #Tercer viaje 
 
-T.payTicket(C116, datetime.now())
+T.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 4 (tercer viaje): " + str(T.money()) )
 
@@ -200,7 +200,7 @@ time.sleep(1)
 
 #Cuarto viaje (no transbordo ya que pasa mas de una hora)
 
-T.payTicket(C136, (timedelta(hours=7) + datetime.now()))
+T.payTicket(C136, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 5 (cuarto viaje; 7 horas despues): " + str(T.money()) )
 
@@ -264,7 +264,7 @@ time.sleep(1)
 
 #Primer viaje
 
-D.payTicket(C116, datetime.now())
+D.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 2 (primer viaje): " + str(D.money()) )
 
@@ -276,7 +276,7 @@ time.sleep(1)
 
 #Segundo viaje (transbordo)
 
-D.payTicket(C112, datetime.now())
+D.payTicket(C112, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 3 (segundo viaje; transbordo): " + str(D.money()) )
 
@@ -289,11 +289,8 @@ time.sleep(1)
 
 #Tercer viaje
 
-#Este testeo fue hecho a las 12:48. Para comprobar la precision de los viajes medio boleto en la franja horaria entre las 0 y las 6
-#basta con solo cambiar el timedelta
 
-
-D.payTicket(C116, timedelta(hours=14)+datetime.now())
+D.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 print ("Dinero fase 4 (tercer viaje, 14 horas despues; viaje normal): " + str(D.money()) )
 
@@ -309,7 +306,7 @@ time.sleep(1)
 
 #Cuarto viaje (DEBERIA ser TRANSBORDO NORMAL)
 
-D.payTicket(C136, timedelta(hours=14)+datetime.now())
+D.payTicket(C136, datetime.strptime ("01/09/2015 18:20", "%d/%m/%y %H:%M"))
 
 
 #print ("\n \n Datos de la tarjeta despues del Cuarto viaje: \n \n ")
