@@ -23,12 +23,12 @@ class Tarjeta:
 	def auxpayTicket (self,bondiola,horario):
 		self.horario = horario
 		if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.line and self.horario - self.time_bondi_ant < timedelta(minutes=60):
-			if self.guita >= 1.9:
-				self.guita = self.guita - 1.9
+			if self.guita >= 1.90:
+				self.guita = self.guita - 1.90
 				self.flag_bondi_ant = False
 				self.bondi_anterior = 0			# LINEA de bondi anterior
 				self.time_bondi_ant = 0
-				self.aux_donetravels.set_travel(bondiola,self.horario,1.9)
+				self.aux_donetravels.set_travel(bondiola,self.horario,1.90)
 				self.list_viajes.append(self.aux_donetravels)
 				self.aux_donetravels = Viaje()
 				return True
@@ -82,7 +82,7 @@ class TarjetaMedioBoleto (Tarjeta):
 		else:
 			if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.line and self.horario - self.time_bondi_ant < timedelta(minutes=60):
 				if self.guita >= 0.96:
-					self.guita = self.guita - 0.960
+					self.guita = self.guita - 0.96
 					self.flag_bondi_ant = False
 					self.bondi_anterior = 0			# LINEA de bondi anterior
 					self.time_bondi_ant = 0
@@ -92,13 +92,13 @@ class TarjetaMedioBoleto (Tarjeta):
 					return True
 			else:
 		# else Normal
-				if self.guita >= 2.9:
-					self.guita = self.guita - 2.9
+				if self.guita >= 2.90:
+					self.guita = self.guita - 2.90
 					if self.flag_bondi_ant == False:
 						self.flag_bondi_ant = True
 					self.bondi_anterior = bondiola.line
 					self.time_bondi_ant = self.horario
-					self.aux_donetravels.set_travel(bondiola,self.horario,2.9)
+					self.aux_donetravels.set_travel(bondiola,self.horario,2.90)
 					self.list_viajes.append(self.aux_donetravels)
 					self.aux_donetravels = Viaje()
 					return True
