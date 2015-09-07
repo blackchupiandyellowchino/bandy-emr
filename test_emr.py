@@ -30,14 +30,14 @@ def test_viajes_done():
 
 	#Tarjeta medio boleto
 
-	#Primer viaje -> 510 - 2.9 = 517.10
+	#Primer viaje -> 510 - 2.9 = 507.10
 	M.payTicket(C116, datetime.strptime ("01/09/2015 19:00", "%d/%m/%Y %H:%M"))
-	assert M.money() == 517.10
-	#Segundo viaje (transbordo) -> 517.10 - 0.96 = 516.14
+	assert M.money() == 507.10
+	#Segundo viaje (transbordo) -> 507.10 - 0.96 = 506.14
 	M.payTicket(C112, datetime.strptime ("01/09/2015 19:20", "%d/%m/%Y %H:%M"))
-	assert M.money() == 516.14
-	#Tercer viaje (Normal, no medio) -> 516.14 - 5.75 = 510.39
+	assert M.money() == 506.14
+	#Tercer viaje (Normal, no medio) -> 506.14 - 5.75 = 500.39
 	M.payTicket(C136, datetime.strptime ("01/09/2015 04:40", "%d/%m/%Y %H:%M"))
-	#Cuarto viaje (transbordo normal, no medio) -> 510.39 - 1.9 = 508.49
+	#Cuarto viaje (transbordo normal, no medio) -> 500.39 - 1.9 = 498.49
 	M.payTicket(C116, datetime.strptime ("01/09/2015 05:00", "%d/%m/%Y %H:%M"))
-	assert M.money() == 508.19
+	assert M.money() == 498.19
