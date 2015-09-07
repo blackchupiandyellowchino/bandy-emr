@@ -82,7 +82,7 @@ class TarjetaMedioBoleto (Tarjeta):
 		else:
 			if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.line and self.horario - self.time_bondi_ant < timedelta(minutes=60):
 				if self.guita >= 0.96:
-					self.guita = self.guita - 0.99
+					self.guita = self.guita - 0.96
 					self.flag_bondi_ant = False
 					self.bondi_anterior = 0			# LINEA de bondi anterior
 					self.time_bondi_ant = 0
