@@ -41,4 +41,4 @@ def test_viajes_done():
 	M.payTicket(C136, datetime.strptime ("01/09/2015 04:40", "%d/%m/%Y %H:%M"))
 	#Cuarto viaje (transbordo normal, no medio) -> 500.39 - 1.9 = 498.49
 	M.payTicket(C116, datetime.strptime ("01/09/2015 05:00", "%d/%m/%Y %H:%M"))
-	assert M.money() == 498.19
+	assert M.money() == 498.49
