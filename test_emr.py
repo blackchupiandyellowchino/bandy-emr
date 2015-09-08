@@ -11,15 +11,18 @@ T = Tarjeta()
 M = TarjetaMedioBoleto()
 
 
-def test_reload():
+def test_reload_norm():
 	T.reload(196)
 	assert T.money() == 230
+
+
+def test_reload_medio():
 	M.reload(368)
 	M.reload(50)
 	assert M.money() == 510
 	
 
-def test_viajes_done():
+def test_viajes_done_norm():
 
 	#Tarjeta normal
 
@@ -28,6 +31,9 @@ def test_viajes_done():
 	#Segundo viaje (transbordo) -> 224.25 - 1.90 = 222.35
 	T.payTicket(C112, datetime.strptime ("01/09/2015 18:40", "%d/%m/%Y %H:%M"))
 	assert T.money() == 222.35
+
+
+def test_viajes_done_medio():
 
 	#Tarjeta medio boleto
 

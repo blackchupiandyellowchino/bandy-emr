@@ -52,12 +52,15 @@ class Tarjeta:
 
 	def reload (self,toload):
 		self.toload = toload
-		if self.toload == 196:
-			self.guita = self.guita + 230
-		elif self.toload == 368:
-			self.guita = self.guita + 460
+		if self.toload >= 0:
+			if self.toload == 196:
+				self.guita = self.guita + 230
+			elif self.toload == 368:
+				self.guita = self.guita + 460
+			else:
+				self.guita = self.guita + self.toload
 		else:
-			self.guita = self.guita + self.toload
+			print ("Error. No se puede cargar saldo negativo o nulo")
 
 
 	def money (self):
@@ -132,3 +135,7 @@ class Viaje:
 		self.emp = bondiola.emp
 		self.line = bondiola.line
 		self.int = bondiola.int
+
+
+T = Tarjeta()
+T.reload("asd")
