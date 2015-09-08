@@ -1,5 +1,6 @@
 from TP_EMR import *
 from datetime import datetime
+import math
 
 
 C112 = Bondis("Azul",112,1)
