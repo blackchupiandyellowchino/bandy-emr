@@ -11,20 +11,19 @@ T = Tarjeta()
 M = TarjetaMedioBoleto()
 
 
+
+
+
+
 def test_reload_norm():
 	T.reload(196)
 	assert T.money() == 230
+	assert T.reload("asd") == "No se pueden ingresar letras papwa"
+	assert T.money() == 230
 
-
-def test_reload_medio():
-	M.reload(368)
-	M.reload(50)
-	assert M.money() == 510
 	
 
-def test_viajes_done_norm():
-
-	#Tarjeta normal
+def test_viajes_norm():
 
 	#Primer viaje -> 230 - 5.75 = 224.25
 	T.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
@@ -33,7 +32,37 @@ def test_viajes_done_norm():
 	assert T.money() == 222.35
 
 
-def test_viajes_done_medio():
+def test_viajes_done_norm():
+	lista_aux = []
+	lista_aux.hora.append(datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	lista_aux.costo.append(5.75)
+	lista_aux.emp.append("Amarillo")
+	lista_aux.line.append(116)
+	lista_aux.int.append(5)
+	
+	lista_aux.hora.append(datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	lista_aux.costo.append(1.90)
+	lista_aux.emp.append("Azul")
+	lista_aux.line.append(136)
+	lista_aux.int.append(124)
+	
+
+	for i in range(T.cant_viajes):
+		assert lista_aux[i].hora == T.list_viajes[i].hora
+		assert lista_aux[i].costo == T.list_viajes[i].costo
+		assert lista_aux[i].emp == T.list_viajes[i].emp
+		assert lista_aux[i].line == T.list_viajes[i].line
+		assert lista_aux[i].int == T.list_viajes[i].int
+
+
+def test_reload_medio():
+	M.reload(368)
+	M.reload(50)
+	assert M.money() == 510
+
+
+
+def test_viajes_medio():
 
 	#Tarjeta medio boleto
 

@@ -2,9 +2,22 @@
 import time
 from datetime import datetime, timedelta
 import math
-#now = datetime.now()
+
+#goo.gl/CwAIKy
+#goo.gl/p99Ttt
+
 
 #datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M")
+
+def is_number(s):
+	try:
+		float(s)
+		return True
+	except ValueError:
+		return False
+
+
+
 
 class Tarjeta:
 	def __init__(self):
@@ -31,7 +44,7 @@ class Tarjeta:
 				self.time_bondi_ant = 0
 				self.aux_donetravels.set_travel(bondiola,self.horario,1.90)
 				self.list_viajes.append(self.aux_donetravels)
-				self.aux_donetravels = Viaje()
+				#self.aux_donetravels = Viaje()
 				return True
 		else:
 
@@ -52,15 +65,18 @@ class Tarjeta:
 
 	def reload (self,toload):
 		self.toload = toload
-		if self.toload >= 0:
-			if self.toload == 196:
-				self.guita = self.guita + 230
-			elif self.toload == 368:
-				self.guita = self.guita + 460
+		if is_number(self.toload):
+			if self.toload >= 0:
+				if self.toload == 196:
+					self.guita = self.guita + 230
+				elif self.toload == 368:
+					self.guita = self.guita + 460
+				else:
+					self.guita = self.guita + self.toload
 			else:
-				self.guita = self.guita + self.toload
+				return "Error. No se puede cargar saldo negativo o nulo"
 		else:
-			print ("Error. No se puede cargar saldo negativo o nulo")
+			return "No se pueden ingresar letras papwa"
 
 
 	def money (self):
@@ -120,7 +136,7 @@ class Bondis:
 
 class Viaje:
 	def __init__ (self):
-		#self.cant_viajes = 0
+		self.cant_viajes = 0
 		self.costo = 0
 		self.hora = 0
 		# De objeto de la clase Bondi
@@ -130,6 +146,7 @@ class Viaje:
 
 
 	def set_travel(self,bondiola,hora,costo):
+		self.cant_viajes = self.cant_viajes + 1
 		self.hora = hora
 		self.costo = costo
 		self.emp = bondiola.emp
@@ -138,4 +155,14 @@ class Viaje:
 
 
 T = Tarjeta()
-T.reload("asd")
+C112 = Bondis("Azul",112,1)
+C116 = Bondis("Amarillo",116,5)
+C136 = Bondis("Naranja",136,124)
+
+T.reload(30)
+
+T.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+T.payTicket(C112, datetime.strptime ("01/09/2015 18:40", "%d/%m/%Y %H:%M"))
+T.payTicket(C136, datetime.strptime ("01/09/2015 18:50", "%d/%m/%Y %H:%M"))
+
+#print T.list_viajes[0].hora
