@@ -34,11 +34,16 @@ def test_viajes_norm():
 
 def test_viajes_done_norm():
 	lista_aux = []
+	
+	lista_aux.append(Viaje ())
+
 	lista_aux.hora.append(datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
 	lista_aux.costo.append(5.75)
 	lista_aux.emp.append("Amarillo")
 	lista_aux.line.append(116)
 	lista_aux.int.append(5)
+
+	lista.aux.append(Viaje ())
 	
 	lista_aux.hora.append(datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
 	lista_aux.costo.append(1.90)
