@@ -64,8 +64,8 @@ class Tarjeta:
 
 
 	def reload (self,toload):
-		self.toload = toload
-		if is_number(self.toload):
+		if is_number(toload):
+			self.toload = toload
 			if self.toload >= 0:
 				if self.toload == 196:
 					self.guita = self.guita + 230
