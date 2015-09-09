@@ -67,6 +67,7 @@ def test_2_viajes_1_bondi():
 	assert T3.money() == 8.50
 
 
+
 def test_sin_saldo_norm():
 
 	#Verifica que no se pueda realizar un viaje sin saldo en tarjeta
@@ -79,18 +80,20 @@ def test_sin_saldo_norm():
 
 
 def test_viajes_done_norm():
+
+
 	T5 = Tarjeta()
 	T5.reload(10)
 	T5.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
 	T5.payTicket(C136, datetime.strptime ("01/09/2015 18:25", "%d/%m/%Y %H:%M"))
 	lista_aux = T5.doneTravels()
-	assert lista_aux[0].hora == datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M")
+	assert lista_aux[0].hora == "01/09/2015 18:20"
 	assert lista_aux[0].costo == 5.75
 	assert lista_aux[0].emp == "Amarillo"
 	assert lista_aux[0].line == 116
 	assert lista_aux[0].int == 5
 
-	assert lista_aux[1].hora == datetime.strptime ("01/09/2015 18:25", "%d/%m/%Y %H:%M")
+	assert lista_aux[1].hora == "01/09/2015 18:25"
 	assert lista_aux[1].costo == 1.90
 	assert lista_aux[1].emp == "Naranja"
 	assert lista_aux[1].line == 136

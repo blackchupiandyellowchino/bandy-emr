@@ -98,7 +98,7 @@ class TarjetaMedioBoleto (Tarjeta):
 	def payTicket (self,bondiola,horario):
 		self.horario = horario
 		if 0 <= self.horario.time().hour <= 6:
-			self.auxpayTicket(bondiola,horario)
+			return self.auxpayTicket(bondiola,horario)
 		else:
 			if self.flag_bondi_ant == True and self.bondi_anterior != bondiola.line and self.horario - self.time_bondi_ant < timedelta(minutes=60):
 				if self.guita >= 0.96:
