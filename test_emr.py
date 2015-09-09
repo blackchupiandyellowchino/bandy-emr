@@ -67,6 +67,20 @@ def test_2_viajes_1_bondi():
 	assert T3.money() == 8.50
 
 
+def test_2_viajes_2_horas():
+
+	#Verifica que no se produzca transbordo en dos viajes con dos horas de diferencia
+
+	T3 = Tarjeta()
+	T3.reload(20)
+	#Primer viaje -> 20 - 5.75 = 14.25
+	T3.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	#Segundo viaje (normal) -> 14.25 - 5.75 = 8.50
+	T3.payTicket(C136, datetime.strptime ("01/09/2015 20:20", "%d/%m/%Y %H:%M"))
+	assert T3.money() == 8.50
+
+
+
 
 def test_sin_saldo_norm():
 
@@ -161,6 +175,20 @@ def test_2_viajes_1_bondi():
 
 
 
+def test_2_viajes_2_horas():
+
+	#Verifica que no se produzca transbordo en dos viajes con dos horas de diferencia
+
+	M3 = TarjetaMedioBoleto()
+	M3.reload(20)
+	#Primer viaje -> 20 - 2.90 = 17.10
+	M3.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	#Segundo viaje (normal) -> 17.10 - 2.90 = 14.20
+	M3.payTicket(C136, datetime.strptime ("01/09/2015 20:20", "%d/%m/%Y %H:%M"))
+	assert M3.money() == 14.20
+
+
+
 def test_sin_saldo_norm():
 
 	#Verifica que no se pueda realizar un viaje sin saldo en tarjeta
@@ -194,3 +222,5 @@ def test_viajes_done_norm():
 	assert lista_aux[1].line == 136
 	assert lista_aux[1].int == 124
 
+def test_wut():
+	assert 2 == 3
