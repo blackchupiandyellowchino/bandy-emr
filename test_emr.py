@@ -28,7 +28,8 @@ def test_reload_norm():
 def test_transbordo_norm():
 
 	#Verifica funcionamiento del transbordo
-
+	T1 = Tarjeta()
+	T1.reload(196)
 	#Primer viaje -> 230 - 5.75 = 224.25
 	T1.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
 	#Segundo viaje (transbordo) -> 224.25 - 1.90 = 222.35
@@ -82,7 +83,7 @@ def test_viajes_done_norm():
 	T5.reload(10)
 	T5.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
 	T5.payTicket(C136, datetime.strptime ("01/09/2015 18:25", "%d/%m/%Y %H:%M"))
-	lista_aux = T5.done_Travels()
+	lista_aux = T5.doneTravels()
 	assert lista_aux[0].hora == datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M")
 	assert lista_aux[0].costo == 5.75
 	assert lista_aux[0].emp == "Amarillo"
