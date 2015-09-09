@@ -122,7 +122,7 @@ class TarjetaMedioBoleto (Tarjeta):
 					self.list_viajes.append(self.aux_donetravels)
 					self.aux_donetravels = Viaje()
 					return True
-				else
+				else:
 					return False
 
 
