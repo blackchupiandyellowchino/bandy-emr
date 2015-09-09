@@ -106,31 +106,90 @@ def test_viajes_done_norm():
 
 # Tests tarjeta medio boleto
 
-"""
 
 
 def test_reload_medio():
-	M.reload(368)
-	M.reload(50)
+	M1.reload(368)
+	M1.reload(50)
 	assert M.money() == 510
 
 
 
-def test_viajes_medio():
+def test_transbordo_medio():
 
-	#Tarjeta medio boleto
+	#Verifica funcionamiento del transbordo
 
-	#Primer viaje -> 510 - 2.9 = 507.10
-	M.payTicket(C116, datetime.strptime ("01/09/2015 19:00", "%d/%m/%Y %H:%M"))
-	assert M.money() == 507.10
-	#Segundo viaje (transbordo) -> 507.10 - 0.96 = 506.14
-	M.payTicket(C112, datetime.strptime ("01/09/2015 19:20", "%d/%m/%Y %H:%M"))
-	assert M.money() == 506.14
-	#Tercer viaje (Normal, no medio) -> 506.14 - 5.75 = 500.39
-	M.payTicket(C136, datetime.strptime ("01/09/2015 04:40", "%d/%m/%Y %H:%M"))
-	#Cuarto viaje (transbordo normal, no medio) -> 500.39 - 1.9 = 498.49
-	M.payTicket(C116, datetime.strptime ("01/09/2015 05:00", "%d/%m/%Y %H:%M"))
-	assert M.money() == 498.49
+	M1 = Tarjeta()
+	M1.reload(10)
+	#Primer viaje -> 10 - 2.90 = 7.10
+	M1.payTicket(C116, datetime.strptime ("03/09/2015 09:30", "%d/%m/%Y %H:%M"))
+	#Segundo viaje (transbordo) -> 7.10 - 0.96 = 6.14
+	M1.payTicket(C112, datetime.strptime ("03/09/2015 09:40", "%d/%m/%Y %H:%M"))
+	assert M1.money() == 6.14
 
 
-"""
+
+
+def test_3_viajes_norm():
+
+	#Verifica que haya un solo transbordo en tres viajes
+
+	M2 = Tarjeta()
+	M2.reload(30)
+	#Primer viaje -> 30 - 5.75 = 24.25
+	M2.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	#Segundo viaje (transbordo) -> 24.25 - 1.90 = 22.35
+	M2.payTicket(C112, datetime.strptime ("01/09/2015 18:40", "%d/%m/%Y %H:%M"))
+	#Tercer viaje (normal) -> 22.35 - 5.75 = 16.60
+	M2.payTicket(C116, datetime.strptime ("01/09/2015 19:00", "%d/%m/%Y %H:%M"))
+	assert M2.money() == 16.60
+
+
+
+def test_2_viajes_1_bondi():
+
+	#Verifica que no se produzca transbordo en dos viajes realizados con el mismo bondi
+
+	M3 = Tarjeta()
+	M3.reload(20)
+	#Primer viaje -> 20 - 5.75 = 14.25
+	M3.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	#Segundo viaje (normal) -> 14.25 - 5.75 = 8.50
+	M3.payTicket(C116, datetime.strptime ("01/09/2015 18:50", "%d/%m/%Y %H:%M"))
+	assert M3.money() == 8.50
+
+
+
+def test_sin_saldo_norm():
+
+	#Verifica que no se pueda realizar un viaje sin saldo en tarjeta
+
+	M4 = Tarjeta()
+	M4.reload(4.50)
+	assert M4.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M")) == False
+	assert M4.money() == 4.50
+
+
+
+def test_viajes_done_norm():
+
+
+	M5 = Tarjeta()
+	M5.reload(10)
+	M5.payTicket(C116, datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M"))
+	M5.payTicket(C136, datetime.strptime ("01/09/2015 18:25", "%d/%m/%Y %H:%M"))
+	lista_aux = M5.list_viajes
+
+
+	assert lista_aux[0].hora == datetime.strptime ("01/09/2015 18:20", "%d/%m/%Y %H:%M")
+	assert lista_aux[0].costo == 5.75
+	assert lista_aux[0].emp == "Amarillo"
+	assert lista_aux[0].line == 116
+	assert lista_aux[0].int == 5
+
+	assert lista_aux[1].hora == datetime.strptime ("01/09/2015 18:25", "%d/%m/%Y %H:%M")
+	assert lista_aux[1].costo == 1.90
+	assert lista_aux[1].emp == "Naranja"
+	assert lista_aux[1].line == 136
+	assert lista_aux[1].int == 124
+
