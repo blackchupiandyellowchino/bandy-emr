@@ -31,7 +31,7 @@ class Tarjeta:
 
 
 	def payTicket (self,bondiola,horario):
-		self.auxpayTicket(bondiola,horario)
+		return self.auxpayTicket(bondiola,horario)
 
 
 	def auxpayTicket (self,bondiola,horario):
