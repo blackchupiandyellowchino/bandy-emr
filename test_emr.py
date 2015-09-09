@@ -221,6 +221,3 @@ def test_viajes_done_norm():
 	assert lista_aux[1].emp == "Naranja"
 	assert lista_aux[1].line == 136
 	assert lista_aux[1].int == 124
-
-def test_wut():
-	assert 2 == 3
