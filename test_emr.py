@@ -112,7 +112,7 @@ def test_reload_medio():
 	M1 = TarjetaMedioBoleto()
 	M1.reload(368)
 	M1.reload(50)
-	assert M.money() == 510
+	assert M1.money() == 510
 
 
 
